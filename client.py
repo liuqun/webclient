@@ -30,9 +30,9 @@ def talk_with_remote_host(hostname, port):
     """
     s = socket(AF_INET, SOCK_STREAM)
     s.connect((hostname, port))
-    item = '/'
+    path = '/'
     http_request = \
-        'GET {} HTTP/1.1\r\nHost: {}\r\nConnection: close\r\n\r\n'.format(item, hostname)
+        'GET {} HTTP/1.1\r\nHost: {}\r\nConnection: close\r\n\r\n'.format(path, hostname)
     # 发送 HTTP 请求
     s.send(bytes(http_request, 'utf-8'))
 
