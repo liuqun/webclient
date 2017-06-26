@@ -42,11 +42,12 @@ def talk_with_remote_host(hostname, port):
         # 每次最多接收1k字节:
         d = s.recv(1024)
         if not d:
+            s.shutdown(SHUT_RDWR)  # 停止数据读写
             break
         buf_list.append(d)
-    for i in buf_list:
-        print(i)
-    s.shutdown(SHUT_RDWR)  # 停止数据读写
+    with open("HTTP_RESPONSE.log", mode='wb') as file:
+        for i in buf_list:
+            file.write(i)
     s.close()
     return
 
